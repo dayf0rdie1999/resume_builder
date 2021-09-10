@@ -1,8 +1,10 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:resume_builder/screens/authenticate/CheckAdmin.dart';
+import 'package:resume_builder/screens/authenticate/wrapper/authenticate_base_widget_wrapper.dart';
 import 'package:resume_builder/screens/loading/loading.dart';
 import 'package:resume_builder/services/authservice.dart';
 
@@ -10,17 +12,24 @@ import 'module/user.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
-    theme: ThemeData(
-      dividerTheme: DividerThemeData(
-        space: 16.0,
-        thickness: 2.0,
-        indent: 32.0,
-        endIndent: 32.0,
-      ),
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MaterialApp(
+        locale: DevicePreview.locale(context), // Add the locale here
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData(
+          dividerTheme: DividerThemeData(
+            space: 16.0,
+            thickness: 2.0,
+            indent: 32.0,
+            endIndent: 32.0,
+          ),
+        ),
+        home: App(),
+      )
     ),
-    home: App(),
-  ));
+  );
 }
 
 // globally declare firebaseAuthProvider
@@ -64,7 +73,7 @@ class _AppState extends State<App> {
                 final AsyncValue<ResumeUser?> result = ref.watch(authStateChangesProvider);
 
                 if (result.data?.value != null ){
-                  return CheckAdmin(user: result.data!.value!);
+                  return AuthenticateBaseWidgetWrapper(user: result.data!.value!);
                 } else {
                   return Loading();
                 }

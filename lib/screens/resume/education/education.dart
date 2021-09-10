@@ -92,102 +92,100 @@ class _EducationState extends State<Education> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-            appBar: ResumeAppBar(
-              user: widget.user,
-              title: "Education ${parser.getName('mortar_board').code}",
-              appBar: AppBar(),
-            ),
-            body: Card(
-              child: Center(
-                child: Column(
+      appBar: ResumeAppBar(
+        user: widget.user,
+        title: "Education ${parser.getName('mortar_board').code}",
+        appBar: AppBar(),
+      ),
+      body: Card(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Embry-Riddle Aeronautical University",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue[900],
-                            ),
-                          ),
-                          SizedBox(width: 32.0),
-                          Text(
-                            "Daytona Beach, FL",
-                          ),
-                        ],
+                    Text(
+                      "Embry-Riddle Aeronautical University",
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue[900],
                       ),
                     ),
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                      title: Text(
-                        "${widget.educationData?["Major"]}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Area of Concentration: ${widget.educationData?["Area of Concentration"]}"),
-                          Text("Minor: ${widget.educationData?["Minor"]}")
-                        ],
-                      ),
-                      trailing: Text(
-                        "CGPA: ${widget.educationData?["CGPA"]}/4.00",
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                      isThreeLine: true,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Graduation Date:",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          SizedBox(width: 8.0),
-                          Text(
-                            "${widget.educationData?["Graduation Date"]}",
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          Text(
-                              "${parser.getName('fireworks').code}${parser.getName('fireworks').code}${parser.getName('fireworks').code}")
-                        ],
-                      ),
+                    SizedBox(width: 32.0),
+                    Text(
+                      "Daytona Beach, FL",
                     ),
                   ],
                 ),
               ),
-            ),
-            floatingActionButton: widget.user.admin ? FloatingActionButton(
-              onPressed: () {
-                _editCGPADialog(context);
-              },
-              child: Icon(Icons.edit),
-            ) : null ,
-            bottomNavigationBar: ResumeNavigation(user: widget.user,selectedIndex: pageIndex,),
-          );
+              ListTile(
+                contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                title: Text(
+                  "${widget.educationData?["Major"]}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Area of Concentration: ${widget.educationData?["Area of Concentration"]}"),
+                    Text("Minor: ${widget.educationData?["Minor"]}")
+                  ],
+                ),
+                trailing: Text(
+                  "CGPA: ${widget.educationData?["CGPA"]}/4.00",
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+                isThreeLine: true,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Graduation Date:",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    SizedBox(width: 8.0),
+                    Text(
+                      "${widget.educationData?["Graduation Date"]}",
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Text(
+                      "${parser.getName('fireworks').code}${parser.getName('fireworks').code}${parser.getName('fireworks').code}")
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: widget.user.admin ? FloatingActionButton(
+        onPressed: () {
+          _editCGPADialog(context);
+        },
+        child: Icon(Icons.edit),
+      ) : null ,
+      bottomNavigationBar: ResumeNavigation(user: widget.user,selectedIndex: pageIndex,),
+    );
   }
 }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:resume_builder/module/user.dart';
 import 'package:resume_builder/screens/resume/profile/profile.dart';
-import 'package:resume_builder/services/authservice.dart';
 import 'package:resume_builder/services/storeservice.dart';
 
 
