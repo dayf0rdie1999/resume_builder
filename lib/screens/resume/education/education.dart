@@ -13,7 +13,9 @@ class Education extends StatefulWidget {
 
   final Map<String,dynamic>? educationData;
 
-  const Education({Key? key,this.educationData, required this.user}) : super(key: key);
+  final bool isPhone;
+
+  const Education({Key? key,this.educationData, required this.user, required this.isPhone}) : super(key: key);
 
   @override
   _EducationState createState() => _EducationState();
@@ -23,7 +25,7 @@ class _EducationState extends State<Education> {
 
   final parser = EmojiParser();
 
-  final int pageIndex = 1;
+  final int pageIndex = 0;
 
   late bool editMode = false;
 
@@ -184,7 +186,7 @@ class _EducationState extends State<Education> {
         },
         child: Icon(Icons.edit),
       ) : null ,
-      bottomNavigationBar: ResumeNavigation(user: widget.user,selectedIndex: pageIndex,),
+      bottomNavigationBar: widget.isPhone ? ResumeNavigation(user: widget.user,selectedIndex: pageIndex,) : null,
     );
   }
 }

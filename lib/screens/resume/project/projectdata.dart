@@ -10,7 +10,9 @@ class StreamProjectData extends StatelessWidget {
 
   final ResumeUser user;
 
-  const StreamProjectData({Key? key, required this.user}) : super(key: key);
+  final bool isPhone;
+
+  const StreamProjectData({Key? key, required this.user, required this.isPhone}) : super(key: key);
 
 
   @override
@@ -24,7 +26,7 @@ class StreamProjectData extends StatelessWidget {
           return Loading();
         }
 
-        return Project(user: user,snapshot: snapshot,);
+        return Project(user: user,snapshot: snapshot,isPhone: isPhone,);
       }
     );
   }

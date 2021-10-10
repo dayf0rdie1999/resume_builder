@@ -8,7 +8,9 @@ class CheckAdminTabletUI extends StatefulWidget {
 
   final ResumeUser user;
 
-  const CheckAdminTabletUI({Key? key, required this.user}) : super(key: key);
+  final bool isFromPhone;
+
+  const CheckAdminTabletUI({Key? key, required this.user, required this.isFromPhone}) : super(key: key);
 
   @override
   _CheckAdminTabletUIState createState() => _CheckAdminTabletUIState();
@@ -35,11 +37,20 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
     );
   }
 
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     animatedIconController.dispose();
+  }
+
+  void checkIsFromPhone() {
+    if (widget.isFromPhone) {
+      setState(() {
+        widgetStatus = "Education";
+      });
+    }
   }
 
   @override

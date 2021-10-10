@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:resume_builder/module/user.dart';
+import 'package:resume_builder/screens/authenticate/check_admin_tablet.dart';
+import 'package:resume_builder/screens/resume/education/education.dart';
+import 'package:resume_builder/screens/resume/education/educationdata.dart';
 import 'package:resume_builder/screens/resume/profile/profile.dart';
 import 'package:resume_builder/services/storeservice.dart';
 
@@ -9,7 +12,9 @@ class CheckAdmin extends StatefulWidget {
 
   final ResumeUser user;
 
-  const CheckAdmin({Key? key, required this.user}) : super(key: key);
+  final bool isPhone;
+
+  const CheckAdmin({Key? key, required this.user, required this.isPhone}) : super(key: key);
 
   @override
   _CheckAdminState createState() => _CheckAdminState();
@@ -33,10 +38,10 @@ class _CheckAdminState extends State<CheckAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.isPhone ? AppBar(
         title: Text("Are you Admin${parser.getName('question').code}"),
         centerTitle: true,
-      ),
+      ): null,
       body: Form(
         key: _CheckAdminFormKey,
         child: Column(
@@ -74,7 +79,7 @@ class _CheckAdminState extends State<CheckAdmin> {
                          widget.user.admin = true;
                          Navigator.pushReplacement(
                              context,
-                             MaterialPageRoute(builder: (context) => Profile(user: widget.user,))
+                             MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true))
                          );
                        } else {
                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Incorrect Admin Passcode")));
@@ -91,9 +96,7 @@ class _CheckAdminState extends State<CheckAdmin> {
                   onPressed: (){
                     Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Profile(user: widget.user,)
-                        )
+                        MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true))
                     );
                   },
                   child: Text(

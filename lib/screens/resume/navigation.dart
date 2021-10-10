@@ -21,21 +21,17 @@ class _ResumeNavigationState extends State<ResumeNavigation> {
 
 
   _onItemTapped(int index) {
-    if (index == 0 && widget.selectedIndex != index) {
+     if (index == 0 && widget.selectedIndex != index) {
       Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => Profile(user: widget.user,))
+          MaterialPageRoute(builder: (context) => FutureEducationData(user: widget.user, isPhone: true))
       );
     } else if (index == 1 && widget.selectedIndex != index) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => FutureEducationData(user: widget.user,))
+          MaterialPageRoute(builder: (context) => StreamProjectData(user: widget.user,isPhone: true))
       );
     } else if (index == 2 && widget.selectedIndex != index) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => StreamProjectData(user: widget.user,))
-      );
-    } else if (index == 3 && widget.selectedIndex != index) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => WorkData(user: widget.user,))
+          MaterialPageRoute(builder: (context) => WorkData(user: widget.user,isPhone: true,))
       );
     }
   }
@@ -45,10 +41,6 @@ class _ResumeNavigationState extends State<ResumeNavigation> {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_box),
-          label: 'Profile',
-        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.school),
           label: 'Education',

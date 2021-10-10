@@ -13,8 +13,9 @@ class Work extends StatefulWidget {
 
   final ResumeUser user;
   final AsyncSnapshot<QuerySnapshot> snapshot;
+  final bool isPhone;
 
-  const Work({Key? key, required this.user, required this.snapshot}) : super(key: key);
+  const Work({Key? key, required this.user, required this.snapshot,required this.isPhone}) : super(key: key);
 
   @override
   _WorkState createState() => _WorkState();
@@ -25,7 +26,7 @@ class _WorkState extends State<Work> {
   final parser = EmojiParser();
 
   // Todo:
-  final int pageIndex = 3;
+  final int pageIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class _WorkState extends State<Work> {
         },
         child: Icon(Icons.add_circle_outline),
       ) : null,
-      bottomNavigationBar: ResumeNavigation(user: widget.user,selectedIndex: pageIndex,),
+      bottomNavigationBar: widget.isPhone ? ResumeNavigation(user: widget.user,selectedIndex: pageIndex,) : null,
     );
   }
 }

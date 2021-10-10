@@ -7,7 +7,8 @@ import 'package:resume_builder/services/storeservice.dart';
 
 class WorkData extends StatefulWidget {
   final ResumeUser user;
-  const WorkData({Key? key, required this.user}) : super(key: key);
+  final bool isPhone;
+  const WorkData({Key? key, required this.user, required this.isPhone}) : super(key: key);
 
   @override
   _WorkDataState createState() => _WorkDataState();
@@ -30,7 +31,7 @@ class _WorkDataState extends State<WorkData> {
           return Loading();
         }
 
-        return Work(user: widget.user,snapshot: snapshot,);
+        return Work(user: widget.user,snapshot: snapshot,isPhone: widget.isPhone,);
       }
     );
   }

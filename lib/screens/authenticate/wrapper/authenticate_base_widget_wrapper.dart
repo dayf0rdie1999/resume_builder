@@ -16,9 +16,9 @@ class AuthenticateBaseWidgetWrapper extends StatelessWidget {
     return BaseWidget(
         builder: (context, sizingInformation) {
           if (sizingInformation.deviceScreenType == DeviceScreenType.Mobile) {
-            return CheckAdmin(user: user,);
+            return CheckAdmin(user: user, isPhone: true);
           } else if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
-            return CheckAdminTabletUI(user: user,);
+            return CheckAdminTabletUI(user: user, isFromPhone: false);
           } else {
             return Text("Desktop Size UI");
           }

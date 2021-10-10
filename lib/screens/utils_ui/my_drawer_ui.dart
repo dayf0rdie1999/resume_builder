@@ -55,15 +55,6 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           InkWell(
             onTap: () {
-              widget.updateWidget("Profile");
-            },
-            child: ListTile(
-              title: Text("Profile"),
-              trailing: Icon(Icons.account_box),
-            ),
-          ),
-          InkWell(
-            onTap: () {
               widget.updateWidget("Education");
             },
             child: ListTile(

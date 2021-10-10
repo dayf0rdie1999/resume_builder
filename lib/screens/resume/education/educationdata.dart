@@ -9,8 +9,9 @@ import 'package:resume_builder/services/storeservice.dart';
 class FutureEducationData extends StatefulWidget {
 
   final ResumeUser user;
+  final bool isPhone;
 
-  const FutureEducationData({Key? key,required this.user}) : super(key: key);
+  const FutureEducationData({Key? key,required this.user, required this.isPhone}) : super(key: key);
 
   @override
   _FutureEducationDataState createState() => _FutureEducationDataState();
@@ -24,7 +25,7 @@ class _FutureEducationDataState extends State<FutureEducationData> {
       future: StoreService().getAdminEducation(),
       builder: (BuildContext context, AsyncSnapshot<Map<String,dynamic>?> snapshot) {
         if (snapshot.hasData) {
-          return Education(user: widget.user,educationData: snapshot.data,);
+          return Education(user: widget.user,educationData: snapshot.data, isPhone: widget.isPhone,);
         } else if (snapshot.hasError) {
           return Text("Something Wrong");
         }

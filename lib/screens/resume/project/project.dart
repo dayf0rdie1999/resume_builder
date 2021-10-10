@@ -11,7 +11,8 @@ class Project extends StatefulWidget {
 
   final ResumeUser user;
   final AsyncSnapshot<QuerySnapshot> snapshot;
-  const Project({Key? key, required this.user, required this.snapshot}) : super(key: key);
+  final bool isPhone;
+  const Project({Key? key, required this.user, required this.snapshot, required this.isPhone}) : super(key: key);
 
   @override
   _ProjectState createState() => _ProjectState();
@@ -21,7 +22,7 @@ class _ProjectState extends State<Project> {
 
   final parser = EmojiParser();
 
-  final int pageIndex = 2;
+  final int pageIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _ProjectState extends State<Project> {
         },
         child: Icon(Icons.add),
       ) : null,
-      bottomNavigationBar: ResumeNavigation(user: widget.user,selectedIndex: pageIndex,),
+      bottomNavigationBar: widget.isPhone ? ResumeNavigation(user: widget.user,selectedIndex: pageIndex,) : null,
     );
   }
 }
