@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/module/user.dart';
 import 'package:resume_builder/screens/authenticate/CheckAdmin.dart';
 import 'package:resume_builder/screens/resume/education/educationdata.dart';
+import 'package:resume_builder/screens/resume/project/project_categories.dart';
 import 'package:resume_builder/screens/resume/project/projectdata.dart';
 import 'package:resume_builder/screens/resume/work/workdata.dart';
 
@@ -19,7 +20,7 @@ class ResumeTabletScreenWrapperUI extends StatelessWidget {
     } else if (widgetName == "Education") {
       return FutureEducationData(user: user,isPhone: false,);
     } else if (widgetName == "Project") {
-      return StreamProjectData(user: user,isPhone: false,);
+      return ProjectCategoriesUI(user: user,isPhone: false,);
     } else {
       return WorkData(user: user,isPhone: false,);
     }

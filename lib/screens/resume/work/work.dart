@@ -31,11 +31,11 @@ class _WorkState extends State<Work> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ResumeAppBar(
+      appBar: widget.isPhone ? ResumeAppBar(
         user: widget.user,
         title: "Work Experience ${parser.getName('briefcase').code}",
         appBar: AppBar(),
-      ),
+      ): null,
       body: ListView(
         children: widget.snapshot.data!.docs.map((DocumentSnapshot document) {
           Map<String,dynamic> data = document.data() as Map<String,dynamic>;
@@ -57,10 +57,13 @@ class _WorkState extends State<Work> {
                 isThreeLine: true,
                 title: Row(
                   children: <Widget>[
-                    Text(
-                      workData.companyName,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
+                    Expanded(
+                      child: Text(
+                        workData.companyName,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ],

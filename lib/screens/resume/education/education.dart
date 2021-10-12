@@ -98,11 +98,11 @@ class _EducationState extends State<Education> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: ResumeAppBar(
+      appBar: widget.isPhone ? ResumeAppBar(
         user: widget.user,
         title: "Education ${parser.getName('mortar_board').code}",
         appBar: AppBar(),
-      ),
+      ) : null,
       body: Card(
         child: Center(
           child: Column(
@@ -112,17 +112,24 @@ class _EducationState extends State<Education> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      "Embry-Riddle Aeronautical University",
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900],
+                    Expanded(
+                      flex: 0,
+                      child: Text(
+                        "Embry-Riddle Aeronautical University",
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue[900],
+                        ),
                       ),
                     ),
                     SizedBox(width: 32.0),
-                    Text(
-                      "Daytona Beach, FL",
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "Daytona Beach, FL",
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),
@@ -139,16 +146,16 @@ class _EducationState extends State<Education> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Area of Concentration: ${widget.educationData?["Area of Concentration"]}"),
-                    Text("Minor: ${widget.educationData?["Minor"]}")
+                    Text("Minor: ${widget.educationData?["Minor"]}"),
                   ],
                 ),
                 trailing: Text(
-                  "CGPA: ${widget.educationData?["CGPA"]}/4.00",
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    decoration: TextDecoration.underline,
+                    "CGPA: ${widget.educationData?["CGPA"]}/4.00",
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
-                ),
                 isThreeLine: true,
               ),
               Padding(
@@ -157,22 +164,32 @@ class _EducationState extends State<Education> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      "Graduation Date:",
-                      style: TextStyle(
-                        fontSize: 20.0,
+                    Expanded(
+                      flex: 0,
+                      child: Text(
+                        "Graduation Date:",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
                       ),
                     ),
-                    SizedBox(width: 8.0),
-                    Text(
-                      "${widget.educationData?["Graduation Date"]}",
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 20.0,
+                    Expanded(
+                      flex: 0,
+                      child: Text(
+                        "${widget.educationData?["Graduation Date"]}",
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
                       ),
                     ),
-                    Text(
-                      "${parser.getName('fireworks').code}${parser.getName('fireworks').code}${parser.getName('fireworks').code}")
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "${parser.getName('fireworks').code}${parser.getName('fireworks').code}${parser.getName('fireworks').code}",
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               ),

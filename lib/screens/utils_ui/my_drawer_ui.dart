@@ -4,7 +4,9 @@ class MyDrawer extends StatefulWidget {
 
   final Function(String) updateWidget;
 
-  const MyDrawer({Key? key, required this.updateWidget}) : super(key: key);
+  final String currentWidget;
+
+  const MyDrawer({Key? key, required this.updateWidget, required this.currentWidget}) : super(key: key);
 
   @override
   _MyDrawerState createState() => _MyDrawerState();
@@ -43,6 +45,13 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                     SizedBox(height: 8.0,),
                     Text(
+                      "Email: paulduonganh@gmail.com",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
                       "Welcome to my resume",
                       style: TextStyle(
                         fontSize: 16.0,
@@ -54,30 +63,54 @@ class _MyDrawerState extends State<MyDrawer> {
               )
           ),
           InkWell(
-            onTap: () {
+            onTap: (widget.currentWidget == "CheckAdmin") ? null :() {
               widget.updateWidget("Education");
             },
             child: ListTile(
-              title: Text("Education"),
-              trailing: Icon(Icons.school),
+              title: Text(
+                "Education",
+                style: TextStyle(
+                    color: (widget.currentWidget == "CheckAdmin") ? Colors.grey : Colors.black
+                ),
+              ),
+              trailing: Icon(
+                Icons.school,
+                color: (widget.currentWidget == "CheckAdmin") ? Colors.grey : Colors.black,
+              ),
             ),
           ),
           InkWell(
-            onTap: () {
+            onTap: (widget.currentWidget == "CheckAdmin") ? null : () {
               widget.updateWidget("Project");
             },
             child: ListTile(
-              title: Text("Project"),
-              trailing: Icon(Icons.design_services),
+              title: Text(
+                "Project",
+                style: TextStyle(
+                    color: (widget.currentWidget == "CheckAdmin") ? Colors.grey : Colors.black
+                ),
+              ),
+              trailing: Icon(
+                Icons.design_services,
+                color: (widget.currentWidget == "CheckAdmin") ? Colors.grey: Colors.black,
+              ),
             ),
           ),
           InkWell(
-            onTap: () {
+            onTap: (widget.currentWidget == "CheckAdmin") ? null : () {
               widget.updateWidget("Jobs");
             },
             child: ListTile(
-              title: Text("Jobs"),
-              trailing: Icon(Icons.work),
+              title: Text(
+                "Jobs",
+                style: TextStyle(
+                  color: (widget.currentWidget == "CheckAdmin") ? Colors.grey : Colors.black
+                ),
+              ),
+              trailing: Icon(
+                Icons.work,
+                color: (widget.currentWidget == "CheckAdmin") ? Colors.grey : Colors.black,
+              ),
             ),
           ),
         ],

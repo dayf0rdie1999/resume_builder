@@ -22,7 +22,6 @@ class _ProjectState extends State<Project> {
 
   final parser = EmojiParser();
 
-  final int pageIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,6 @@ class _ProjectState extends State<Project> {
         },
         child: Icon(Icons.add),
       ) : null,
-      bottomNavigationBar: widget.isPhone ? ResumeNavigation(user: widget.user,selectedIndex: pageIndex,) : null,
     );
   }
 }

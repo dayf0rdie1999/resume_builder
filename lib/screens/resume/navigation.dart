@@ -3,6 +3,7 @@ import 'package:resume_builder/module/user.dart';
 import 'package:resume_builder/screens/resume/education/educationdata.dart';
 import 'package:resume_builder/screens/resume/profile/profile.dart';
 import 'package:resume_builder/screens/resume/project/project.dart';
+import 'package:resume_builder/screens/resume/project/project_categories.dart';
 import 'package:resume_builder/screens/resume/project/projectdata.dart';
 import 'package:resume_builder/screens/resume/work/work.dart';
 import 'package:resume_builder/screens/resume/work/workdata.dart';
@@ -27,7 +28,7 @@ class _ResumeNavigationState extends State<ResumeNavigation> {
       );
     } else if (index == 1 && widget.selectedIndex != index) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => StreamProjectData(user: widget.user,isPhone: true))
+          MaterialPageRoute(builder: (context) => ProjectCategoriesUI(user: widget.user,isPhone: true))
       );
     } else if (index == 2 && widget.selectedIndex != index) {
       Navigator.pushReplacement(context,

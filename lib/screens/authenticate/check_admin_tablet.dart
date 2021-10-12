@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:resume_builder/enum/admin_status.dart';
 import 'package:resume_builder/module/user.dart';
+import 'package:resume_builder/screens/resume/contact/contactdata.dart';
 import 'package:resume_builder/screens/resume/resume_tablet_wrapper/resume_tablet_screen_wrapper.dart';
 import 'package:resume_builder/screens/utils_ui/my_drawer_ui.dart';
 
@@ -10,7 +12,9 @@ class CheckAdminTabletUI extends StatefulWidget {
 
   final bool isFromPhone;
 
-  const CheckAdminTabletUI({Key? key, required this.user, required this.isFromPhone}) : super(key: key);
+  final AdminStatus status;
+
+  const CheckAdminTabletUI({Key? key, required this.user, required this.isFromPhone, required this.status}) : super(key: key);
 
   @override
   _CheckAdminTabletUIState createState() => _CheckAdminTabletUIState();
@@ -24,8 +28,9 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
 
   late AnimationController animatedIconController;
 
-  String widgetStatus = "CheckAdmin";
+  late String widgetStatus;
 
+  late String appBarTitle;
 
   @override
   void initState() {
@@ -35,8 +40,31 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
       vsync: this,
       duration: Duration(milliseconds: 450),
     );
+    widgetStatus = checkStatus();
+    appBarTitle = getAppBarTitle();
   }
 
+  String checkStatus() {
+    if (widget.status == AdminStatus.Admin) {
+      return "Education";
+    } else if (widget.status == AdminStatus.User) {
+      return "Education";
+    } else {
+      return "CheckAdmin";
+    }
+  }
+
+  String getAppBarTitle() {
+    if (widgetStatus == "CheckAdmin") {
+      return "Are you Admin${parser.getName('question').code}";
+    } else if (widgetStatus == "Education") {
+      return "Education ${parser.getName('mortar_board').code}";
+    } else if (widgetStatus == "Jobs") {
+      return "Work Experience ${parser.getName('briefcase').code}";
+    } else {
+      return "Project Experience ${parser.getName('clipboard').code}";
+    }
+  }
 
   @override
   void dispose() {
@@ -45,19 +73,12 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
     animatedIconController.dispose();
   }
 
-  void checkIsFromPhone() {
-    if (widget.isFromPhone) {
-      setState(() {
-        widgetStatus = "Education";
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Are you Admin${parser.getName('question').code}"),
+        // "Are you Admin${parser.getName('question').code}"
+        title: Text(appBarTitle),
         centerTitle: true,
         leading: IconButton (
           onPressed: () {
@@ -75,6 +96,20 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
           },
           icon: AnimatedIcon(icon: AnimatedIcons.close_menu, progress: animatedIconController),
         ),
+        actions: <Widget>[
+
+          IconButton(
+            onPressed: (){
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ContactData(user: widget.user,)),
+              );
+
+            },
+            icon: Icon(Icons.email),
+          ),
+        ],
       ),
       body: Center(
         child: Row(
@@ -86,7 +121,7 @@ class _CheckAdminTabletUIState extends State<CheckAdminTabletUI> with SingleTick
                 setState(() {
                   widgetStatus = val;
                 });
-              },),
+              },currentWidget: widgetStatus,),
             ) : Container(),
             Expanded(
               flex: 1,

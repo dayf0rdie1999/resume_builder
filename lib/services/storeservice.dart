@@ -64,11 +64,12 @@ class StoreService {
       "projectSkills": project.projectSkills,
       "position": project.position,
       "mainPoints": project.mainPoints,
+      "Type": project.type,
     }).then((value) => null).catchError((onError) => onError);
   }
 
-  Stream<QuerySnapshot> getProjects() {
-    return _store.collection("adminProjects").snapshots();
+  Stream<QuerySnapshot> getProjects(String type) {
+    return _store.collection("adminProjects").where("Type", isEqualTo: type).snapshots();
   }
 
   Future<String?> deleteProject(String id) async {
@@ -83,6 +84,7 @@ class StoreService {
       "projectSkills": project.projectSkills,
       "position": project.position,
       "mainPoints": project.mainPoints,
+      "Type": project.type,
     })
         .then((value) => null)
         .catchError((onError) => onError);

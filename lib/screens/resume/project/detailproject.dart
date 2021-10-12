@@ -80,28 +80,33 @@ class _DetailProjectState extends State<DetailProject> {
               ],
             ),
           ),
-          SizedBox(
-            height: 100.0,
-            child: GridView.count(
-              scrollDirection: Axis.vertical,
-              crossAxisCount: 5,
-              children: List.generate(widget.selectedProject.projectSkills.length, (index) {
-                return InputChip(
-                  tooltip: widget.selectedProject.projectSkills[index],
-                  avatar: CircleAvatar(
-                    backgroundColor: Colors.blue[600],
-                    child: Text(widget.selectedProject.projectSkills[index][0]),
-                  ),
-                  backgroundColor: Colors.blue[200],
-                  label: Text(
-                    widget.selectedProject.projectSkills[index],
-                    style: TextStyle(
-                      color: Colors.blue[900]
+          Center(
+            child: Container(
+              height: 100.0,
+              width: 600.0,
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisSpacing: 30.0,
+                mainAxisSpacing: 30.0,
+                crossAxisCount: 5,
+                children: List.generate(widget.selectedProject.projectSkills.length, (index) {
+                  return InputChip(
+                    tooltip: widget.selectedProject.projectSkills[index],
+                    avatar: CircleAvatar(
+                      backgroundColor: Colors.blue[600],
+                      child: Text(widget.selectedProject.projectSkills[index][0]),
                     ),
-                  ),
-                  onPressed: (){},
-                );
-              })
+                    backgroundColor: Colors.blue[200],
+                    label: Text(
+                      widget.selectedProject.projectSkills[index],
+                      style: TextStyle(
+                        color: Colors.blue[900]
+                      ),
+                    ),
+                    onPressed: (){},
+                  );
+                })
+              ),
             ),
           ),
           Padding(

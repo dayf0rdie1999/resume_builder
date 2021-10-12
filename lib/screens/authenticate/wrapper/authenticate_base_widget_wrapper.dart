@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_builder/enum/admin_status.dart';
 import 'package:resume_builder/enum/device_screen_type.dart';
 import 'package:resume_builder/module/user.dart';
 import 'package:resume_builder/screens/authenticate/CheckAdmin.dart';
@@ -18,9 +19,10 @@ class AuthenticateBaseWidgetWrapper extends StatelessWidget {
           if (sizingInformation.deviceScreenType == DeviceScreenType.Mobile) {
             return CheckAdmin(user: user, isPhone: true);
           } else if (sizingInformation.deviceScreenType == DeviceScreenType.Tablet) {
-            return CheckAdminTabletUI(user: user, isFromPhone: false);
+            return CheckAdminTabletUI(user: user, isFromPhone: false, status: AdminStatus.Undefined,);
           } else {
-            return Text("Desktop Size UI");
+            // Temporary
+            return CheckAdminTabletUI(user: user, isFromPhone: false, status: AdminStatus.Undefined,);
           }
         }
     );

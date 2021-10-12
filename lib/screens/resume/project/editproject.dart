@@ -24,17 +24,22 @@ class _EditProjectState extends State<EditProject> {
   final  _projectMainPointsController = TextEditingController();
   final _titleController = TextEditingController();
   final _projectSkillsController = TextEditingController();
+  final _projectTypeController = TextEditingController();
+
 
 
   // Todo: Creating all the form keys
   final _titleAndPositionFormKey = GlobalKey<FormState>();
   final _projectSkillsFormKey = GlobalKey<FormState>();
   final _projectMainPointsFormKey = GlobalKey<FormState>();
+  final _projectTypeFormKey = GlobalKey<FormState>();
+
 
   @override
   void initState() {
     _titleController.text = widget.selectedProject.title;
     _positionController.text = widget.selectedProject.position;
+    _projectTypeController.text = widget.selectedProject.type;
     // TODO: implement initState
     super.initState();
   }
@@ -107,6 +112,36 @@ class _EditProjectState extends State<EditProject> {
                         ),
                       ),
                     ),],
+                ),
+              ),
+              // Todo: Adding TextFormField to input type of projects
+              Form(
+                key: _projectTypeFormKey,
+                child:  Center(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                        labelText: "Add Project Type*",
+                      ),
+                      controller: _projectTypeController,
+                      maxLines: 1,
+                      validator: (value) {
+                        if (value == null && value!.isEmpty) {
+                          return "Required Project Type";
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          widget.selectedProject.type = value;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ),
               Divider(

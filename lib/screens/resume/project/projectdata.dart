@@ -12,13 +12,15 @@ class StreamProjectData extends StatelessWidget {
 
   final bool isPhone;
 
-  const StreamProjectData({Key? key, required this.user, required this.isPhone}) : super(key: key);
+  final String type;
+
+  const StreamProjectData({Key? key, required this.user, required this.isPhone, required this.type}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: StoreService().getProjects(),
+      stream: StoreService().getProjects(type),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(snapshot.hasError) {
           return Text("Something went wrong");

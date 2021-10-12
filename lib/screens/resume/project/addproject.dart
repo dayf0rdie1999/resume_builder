@@ -23,12 +23,14 @@ class _AddProjectState extends State<AddProject> {
   final _titleAndPositionFormKey = GlobalKey<FormState>();
   final _projectSkillsFormKey = GlobalKey<FormState>();
   final _projectMainPointsFormKey = GlobalKey<FormState>();
+  final _projectTypeFormKey = GlobalKey<FormState>();
 
   // Todo: Creating TextEditing Controller
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _positionController = TextEditingController();
   final TextEditingController _projectSkillsController = TextEditingController();
   final TextEditingController _projectMainPointsController = TextEditingController();
+  final TextEditingController _projectTypeController = TextEditingController();
 
   // Todo: Creating two lists to add data
   final List<String> skillsList = [];
@@ -59,25 +61,26 @@ class _AddProjectState extends State<AddProject> {
                   Form(
                     key: _titleAndPositionFormKey,
                     child: Column(
-                      children: <Widget>[Center(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-                          child: TextFormField(
-                            controller: _titleController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Enter Project Title",
+                      children: <Widget>[
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+                            child: TextFormField(
+                              controller: _titleController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Enter Project Title*",
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter some text";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter some text";
-                              } else {
-                                return null;
-                              }
-                            },
                           ),
                         ),
-                      ),
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
@@ -85,7 +88,7 @@ class _AddProjectState extends State<AddProject> {
                               controller: _positionController,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: "Enter Your Position"
+                                  labelText: "Enter Your Position*"
                               ),
                               validator: (value) {
                                 if (value == null && value!.isEmpty) {
@@ -97,6 +100,31 @@ class _AddProjectState extends State<AddProject> {
                             ),
                           ),
                         ),],
+                    ),
+                  ),
+                  // Todo: Adding TextFormField to input type of projects
+                  Form(
+                    key: _projectTypeFormKey,
+                    child:  Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                            labelText: "Add Project Type*",
+                          ),
+                          controller: _projectTypeController,
+                          maxLines: 1,
+                          validator: (value) {
+                            if (value == null && value!.isEmpty) {
+                              return "Required Project Type";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   Divider(
@@ -119,7 +147,7 @@ class _AddProjectState extends State<AddProject> {
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                                    labelText: "Add Required Project Skills",
+                                    labelText: "Add Required Project Skills*",
                                   ),
                                   controller: _projectSkillsController,
                                   validator: (value) {
@@ -212,7 +240,7 @@ class _AddProjectState extends State<AddProject> {
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     contentPadding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                                    labelText: "Add Project Main Points",
+                                    labelText: "Add Project Main Points*",
                                   ),
                                   controller: _projectMainPointsController,
                                   maxLines: 5,
@@ -246,7 +274,7 @@ class _AddProjectState extends State<AddProject> {
                     ),
                   ),
                   Container(
-                      height: 100.0,
+                      height: 200.0,
                       child: mainPointsList.isEmpty ? Center(child: Text("Waiting to add main points..."),) :
                       ListView.builder(
                         scrollDirection: Axis.vertical,
@@ -292,9 +320,9 @@ class _AddProjectState extends State<AddProject> {
                           child: ElevatedButton(
                             onPressed: () async {
                               // Todo: Checking if all the input requirement are filled
-                              if (_titleAndPositionFormKey.currentState!.validate() && skillsList.isNotEmpty && mainPointsList.isNotEmpty) {
+                              if (_titleAndPositionFormKey.currentState!.validate() && skillsList.isNotEmpty && mainPointsList.isNotEmpty && _projectTypeFormKey.currentState!.validate()) {
                                 // Todo: Initiate the projectModule Class
-                                ProjectModule _project = ProjectModule(title: _titleController.text,position: _positionController.text,projectSkills: skillsList,mainPoints: mainPointsList);
+                                ProjectModule _project = ProjectModule(title: _titleController.text,position: _positionController.text,projectSkills: skillsList,mainPoints: mainPointsList, type: _projectTypeController.text);
 
                                 // Todo: Adding data to the firestore through ProjectModule Class
                                 String? result = await _storeService.addProject(_project);

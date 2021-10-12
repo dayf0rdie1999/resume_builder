@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:resume_builder/enum/admin_status.dart';
 import 'package:resume_builder/module/user.dart';
 import 'package:resume_builder/screens/authenticate/check_admin_tablet.dart';
 import 'package:resume_builder/screens/resume/education/education.dart';
@@ -79,7 +80,7 @@ class _CheckAdminState extends State<CheckAdmin> {
                          widget.user.admin = true;
                          Navigator.pushReplacement(
                              context,
-                             MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true))
+                             MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true, status: AdminStatus.Admin,))
                          );
                        } else {
                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Incorrect Admin Passcode")));
@@ -96,7 +97,7 @@ class _CheckAdminState extends State<CheckAdmin> {
                   onPressed: (){
                     Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true))
+                        MaterialPageRoute(builder: (context) => (widget.isPhone) ? FutureEducationData(user: widget.user,isPhone: true) : CheckAdminTabletUI(user: widget.user, isFromPhone: true, status: AdminStatus.User,))
                     );
                   },
                   child: Text(
